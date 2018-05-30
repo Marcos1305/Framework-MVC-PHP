@@ -22,6 +22,19 @@ class Route
         $this->routes = $newRoutes;
     }
 
+    private function getRequest()
+    {
+        $obj=new \stdClass;
+        
+        $get=(object)$_GET;
+        $post=(object)$_POST;
+
+        $obj->get=$get;
+        $obj->post=$post;
+        
+        return $obj;   
+    }
+
     private function getUrl()
     {
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -53,22 +66,24 @@ class Route
             //$controller->$action();
             switch (count($param)){
                 case 1:
-                $controller->$action($param[0]);
+                $controller->$action($param[0], $this->getRequest());
                 break;
                 
                 case 2:
-                $controlelr->$action($param[0], $param[1]);
+                $controlelr->$action($param[0], $param[1], $this->getRequest());
                 break;
                 
                 case 3:
-                $controlelr->$action($param[0], $param[1], $param[2]);
+                $controlelr->$action($param[0], $param[1], $param[2], $this->getRequest());
                 break;
 
                 default:
-                    $controller->$action();
+                    $controller->$action($this->getRequest());
 
             }
             
+        }else{
+            echo "Página não encontrada";
         }
 
     }

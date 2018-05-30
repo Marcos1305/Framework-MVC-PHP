@@ -8,8 +8,10 @@ class PostsController
         echo 'posts';
     }
 
-    public function show($id){
-        echo 'Ola ' . $id;
+    public function show($id, $request){
+        echo 'Ola ' . $id.'<br>';
+        echo $request->get->nome .'<br>';
+        echo $request->get->sexo .'<br>';
     }
 }
 
