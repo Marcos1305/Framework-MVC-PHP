@@ -2,10 +2,15 @@
 
 namespace App\Controllers;
 
-class HomeController
-{
+use Core\BaseController;
+
+
+class HomeController extends BaseController
+{   
+   
     public function index(){
-        echo "Home";
+        $this->view->nome = "Marcos Vinicius";
+        $this->renderView('home/index', 'layout');
     }
 }
 
