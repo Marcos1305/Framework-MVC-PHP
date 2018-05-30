@@ -6,6 +6,7 @@ abstract class BaseController{
     protected $view;
     private $viewPath;
     private $layoutPath;
+    private $pageTitle = null;
     public function __construct()
     {
         $this->view = new \stdClass;
@@ -43,6 +44,20 @@ abstract class BaseController{
 
         }else{
             echo "Error: Layout path not found!";
+        }
+    }
+    protected function setPageTitle($page)
+    {
+        $this->pageTitle = $page;
+    }
+
+    protected function getPageTitle($separator = null)
+    {
+        if($separator){
+            echo $this->pageTitle . " " . $separator . " ";
+        }
+        else{
+            echo $this->pageTitle;
         }
     }
 }
