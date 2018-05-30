@@ -10,7 +10,6 @@ class HomeController extends BaseController
    
     public function index(){
         $this->setPageTitle('Home');
-        $this->view->nome = "Marcos Vinicius";
         $this->renderView('home/index', 'layout');
     }
 }
