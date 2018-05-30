@@ -48,7 +48,29 @@ class Route
             }
             
         }
-        
+        if($found){
+            $controller = Container::newController($controller);
+            //$controller->$action();
+            switch (count($param)){
+                case 1:
+                $controller->$action($param[0]);
+                break;
+                
+                case 2:
+                $controlelr->$action($param[0], $param[1]);
+                break;
+                
+                case 3:
+                $controlelr->$action($param[0], $param[1], $param[2]);
+                break;
+
+                default:
+                    $controller->$action();
+
+            }
+            
+        }
+
     }
 
     
