@@ -9,11 +9,11 @@ return [
         'host' => 'database.db'
     ],
     'mysql' => [
-        'host' => 'cursomvc',
-        'database' => 'posts',
+        'host' => 'localhost',
+        'database' => 'cursomvc',
         'user' => 'root',
         'password' => '',
-        'charset' => 'utf-8',
+        'charset' => 'UTF8',
         'collation' => 'utf8_unicode_ci'
     ]
 

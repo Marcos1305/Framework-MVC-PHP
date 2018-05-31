@@ -3,12 +3,15 @@
 namespace App\Controllers;
 
 use Core\BaseController;
+use Core\Container;
 
 
 class PostsController extends BaseController
 {
     public function index(){
-        echo 'posts';
+        $model = Container::getModel("Post");
+        $posts = $model->All();
+        print_r($posts);
     }
 
     public function show($id, $request){
