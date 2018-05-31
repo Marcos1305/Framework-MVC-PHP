@@ -3,8 +3,8 @@
     <div class="row">
         <h1 class="h1">
             <?php $this->getPageTitle();?>
-            <a href="/posts/create" class"btn btn-light float-right">
-                New Post
+            <a href="/posts/create">
+                New Post 
             </a> 
         </h1>
     </div>
@@ -13,7 +13,7 @@
     ?>
     <div class="row" >
             <a href="/posts/<?php echo $post->id;?>/show">
-            <h3 class="h3" style="color: blue"><?php echo $post->title?></h3>
+            <h3 class="h3"><?php echo $post->title?></h3>
             </a>
             <p class="text-justify"><?php echo $post->content?></p>
             

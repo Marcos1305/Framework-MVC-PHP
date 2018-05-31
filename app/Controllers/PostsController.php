@@ -4,20 +4,26 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use Core\Container;
+use  Core\DataBase;
+use Core\Redirect;
 
 
 class PostsController extends BaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $conn = DataBase::getDatabase();  //não esquecer do use Core\DataBase;
+        $this->post = Container::getModelEx("Post", $conn); 
+    }
     public function index(){
         $this->setPageTitle('Posts');
-        $model = Container::getModel("Post");
-        $this->view->posts = $model->All();
+        $this->view->posts = $this->post->All();
         $this->renderView('posts/index', 'layout');
     }
 
     public function show($id){
-        $model = Container::getModel("Post");
-        $this->view->post = $model->find($id);
+        $this->view->post = $this->post->find($id);
         $this->setPageTitle("{$this->view->post->title}");
         $this->renderView('posts/show', 'layout');
     }
@@ -32,7 +38,9 @@ class PostsController extends BaseController
             'title' => $request->post->title,
             'content' => $request->post->content
         ];
-        print_r($request->post);
+        
+        $this->post->create($data);
+        Redirect::route('/posts');
     }
 }
 

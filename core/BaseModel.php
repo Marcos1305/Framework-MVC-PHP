@@ -40,7 +40,7 @@ abstract class BaseModel
         for($i = 0; $i < count($data[2]); $i++){
             $stmt->bindValue("{$data[2][$i]}", $data[3][$i]);
         }
-        $result -> $stmt->execute();
+        $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
     }
@@ -53,7 +53,7 @@ abstract class BaseModel
 
         foreach ($data as $key => $value){
             $strKeys = "{$strKeys},{$key}";
-            $strBinds= "{$strBind},:{$key}";
+            $strBinds= "{$strBinds},:{$key}";
             $binds[] = ":{$key}";
             $values[] = $value;
         }

@@ -22,6 +22,11 @@ class Container
             echo "Página não encontrada";
         }
     }
+    public static function getModelEx($model, $conn)
+    {
+        $objModel = "\\App\\Models\\" . $model;
+        return new $objModel($conn);
+    }
 }
 
 ?>
