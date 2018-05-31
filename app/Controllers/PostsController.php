@@ -42,6 +42,24 @@ class PostsController extends BaseController
         $this->post->create($data);
         Redirect::route('/posts');
     }
+    public function edit($id)
+    {
+        $this->view->post = $this->post->find($id);
+        $this->setPageTitle('Edit post ' . $this->view->post->title);
+        $this->renderView('posts/edit', 'layout');
+    }
+
+    public function update($id, $request)
+    {
+        $data = [
+            'id' => $id,
+            'title' => $request->post->title,
+            'content' => $request->post->content
+        ];
+        
+        $this->post->update($data, $id);
+        Redirect::route('/posts');
+    }
 }
 
 
