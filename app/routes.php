@@ -7,6 +7,7 @@ $route[] = ['/posts/create', 'PostsController@create'];
 $route[] = ['/posts/store', 'PostsController@store'];
 $route[] = ['/posts/{id}/edit', 'PostsController@edit'];
 $route[] = ['/posts/{id}/update', 'PostsController@update'];
+$route[] = ['/posts/{id}/delete', 'PostsController@delete'];
 
 
 

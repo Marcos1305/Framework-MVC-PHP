@@ -16,10 +16,15 @@
             <h3 class="h3"><?php echo $post->title?></h3>
             </a>
             <p class="text-justify"><?php echo $post->content?></p>
-            <p class="btn btn-warning btn-sm">
+            <p class="btn btn-warning btn-sm" >
                 <a href="/posts/<?php echo $post->id ?>/edit">
                     Editar
-                </a>  
+                </a>
+            </p>
+            <p class="btn btn-danger btn-sm" style="margin-left: 2%" onclick="return confirm('Deletar este post?')">
+                <a href="/posts/<?php echo $post->id ?>/delete">
+                    Excluir
+                </a>
             </p>
             
     </div>

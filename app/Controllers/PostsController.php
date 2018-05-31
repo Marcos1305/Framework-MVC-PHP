@@ -60,6 +60,14 @@ class PostsController extends BaseController
         $this->post->update($data, $id);
         Redirect::route('/posts');
     }
+    public function delete($id)
+    {
+        if($this->post->delete($id)){
+            Redirect::route('/posts');
+        }else{
+            echo "Error ao excluir";
+        }
+    }
 }
 
 
