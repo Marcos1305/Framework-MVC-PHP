@@ -3,22 +3,21 @@
 namespace App\Controllers;
 
 use Core\BaseController;
-use Core\Container;
-use  Core\DataBase;
+use App\Models\Post;
 use Core\Redirect;
 
 
 class PostsController extends BaseController
 {
+    private $post;
     public function __construct()
     {
         parent::__construct();
-        $conn = DataBase::getDatabase();  //não esquecer do use Core\DataBase;
-        $this->post = Container::getModelEx("Post", $conn); 
+        $this->post = new Post;
     }
     public function index(){
         $this->setPageTitle('Posts');
-        $this->view->posts = $this->post->All();
+        $this->view->posts =  $this->post->all();
         $this->renderView('posts/index', 'layout');
     }
 
@@ -39,8 +38,14 @@ class PostsController extends BaseController
             'content' => $request->post->content
         ];
         
-        $this->post->create($data);
-        Redirect::route('/posts');
+        try {
+            $this->post->create($data);
+            Redirect::route('/posts');
+            }catch(\Exception $e){
+                throw new Exception("ERRO AO ATUALIZAR", 1);
+                Redirect::route('/posts');
+                
+            }
     }
     public function edit($id)
     {
@@ -52,21 +57,33 @@ class PostsController extends BaseController
     public function update($id, $request)
     {
         $data = [
-            'id' => $id,
             'title' => $request->post->title,
             'content' => $request->post->content
         ];
-        
-        $this->post->update($data, $id);
+        try {
+        $post = $this->post->find($id);
+        $post->update($data);
         Redirect::route('/posts');
+        }catch(\Exception $e){
+            throw new Exception("ERRO AO ATUALIZAR", 1);
+            Redirect::route('/posts');
+            
+        }
+        
+        // $this->post->update($data, $id);
+        // Redirect::route('/posts');
     }
     public function delete($id)
     {
-        if($this->post->delete($id)){
+        try {
+            $post = $this->post->find($id);
+            $post->delete();
             Redirect::route('/posts');
-        }else{
-            echo "Error ao excluir";
-        }
+            }catch(\Exception $e){
+                throw new Exception("ERRO AO EXCLUIR", 1);
+                Redirect::route('/posts');
+                
+            }
     }
 }
 
